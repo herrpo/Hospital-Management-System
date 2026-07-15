@@ -1,0 +1,29 @@
+# Define the compiler
+CXX = g++
+
+# Define any compile-time flags
+CXXFLAGS = -Wall -Wextra -g
+
+# Define the target executable name
+TARGET = hospital_app
+
+# Define the source files (Corrected to Source.cpp)
+SRCS = hospital.cpp Source.cpp
+
+# Define the object files
+OBJS = $(SRCS:.cpp=.o)
+
+# The default rule when you run 'make'
+all: $(TARGET)
+
+# Rule to link the object files into the final executable
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+
+# Rule to compile the .cpp files into .o object files
+%.o: %.cpp Header.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Rule to clean up the compiled files
+clean:
+	rm -f $(OBJS) $(TARGET)
